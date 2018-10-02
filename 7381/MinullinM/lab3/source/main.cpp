@@ -5,6 +5,8 @@
 
 #include "stack.hpp"
 
+#define DETAILED
+
 // Приоритеты обрабатываемых операций
 enum operation_t { NOTHING = 0, ADDITION = 1, SUBSTRACTION = 1, MULTIPLICATION = 2, DIVIDING = 2, POWER = 3 };
 
@@ -105,16 +107,31 @@ std::string postfix_to_infix(const std::string& postfix) {
     Stack< std::pair<std::string, operation_t> > stack;
 
     for (size_t index = 0; index < postfix.length(); ++index) {
-        if (is_digit(postfix[index]) || is_letter(postfix[index]))
+        #ifdef DETAILED
+            std::cout << "[index: " << index << ", symbol: " << postfix[index] << "]: "; 
+        #endif
+        if (is_digit(postfix[index]) || is_letter(postfix[index])) {
+            #ifdef DETAILED
+                std::cout << "operand" << std::endl;
+            #endif
             stack.push(std::make_pair(postfix.substr(index, 1), NOTHING));
+            #ifdef DETAILED
+                std::cout << "\tnew size of stack: " << stack.size() << std::endl;
+            #endif
+        }
         else if (is_operation(postfix[index])) {
+            #ifdef DETAILED
+                std::cout << "operation" << std::endl;
+            #endif
             // Вытаскиваем с вершины стека 2 операнда в обратном порядке:
             // сначала - правый, затем - левый
             std::pair<std::string, operation_t> operand_r = stack.top();
             stack.pop();
             std::pair<std::string, operation_t> operand_l = stack.top();
             stack.pop();
-
+            #ifdef DETAILED
+                std::cout << "\t2 top elements of stack: [" << operand_r.first << ", " << operand_l.first << "]" << std::endl;
+            #endif
             operation_t new_operation = get_operation(postfix[index]);
 
             // Добавляем скобки, если приоритет новой операции выше 
@@ -126,9 +143,13 @@ std::string postfix_to_infix(const std::string& postfix) {
             if (operand_r.second != NOTHING && operand_r.second < new_operation)
                 operand_r.first = "(" + operand_r.first + ")";
 
+            std::pair<std::string, operation_t> new_operand(operand_l.first + " " + postfix.substr(index, 1) + " " + operand_r.first, new_operation);
             // Возвращаем в стек объединение 2 операндов и знак операции,
             // обрамлённый двумя пробельными символами справа и слева
-            stack.push(std::make_pair(operand_l.first + " " + postfix.substr(index, 1) + " " + operand_r.first, new_operation));
+            stack.push(new_operand);
+            #ifdef DETAILED
+                std::cout << "\tnew element of stack: [" << new_operand.first << "]" << std::endl;
+            #endif
         }
     }
 
