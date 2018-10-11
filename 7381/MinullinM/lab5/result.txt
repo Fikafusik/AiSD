@@ -1,0 +1,160 @@
+default test: "empty.txt"
+AVL-Tree input:
+	element:	42
+	values:		empty (0)
+AVL-Tree task: 
+	element		NOT found
+AVL-Tree information: 
+	Height:		0
+	Size:		0
+	Minimum:	AVLTree::minimum() error: AVL-Tree is empty!
+	Maximum:	AVLTree::maximum() error: AVL-Tree is empty!
+	Values:		AVL-Tree is empty
+	Scheme:		AVL-Tree is empty
+
+default test: "found.txt"
+AVL-Tree input:
+	element:	42
+	values:		17, 23, 41, 42 (4)
+AVL-Tree task: 
+	element		found
+AVL-Tree information: 
+	Height:		2
+	Size:		3
+	Minimum:	17
+	Maximum:	41
+	Values:		17 23 41 
+	Scheme:		
+	0	1
+	root:	23
+		left:	17
+		right:	41
+	0	1
+
+default test: "full.txt"
+AVL-Tree input:
+	element:	16
+	values:		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 (16)
+AVL-Tree task: 
+	element		NOT found
+AVL-Tree information: 
+	Height:		5
+	Size:		16
+	Minimum:	0
+	Maximum:	15
+	Values:		0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 
+	Scheme:		
+	0	1	2	3	4
+	root:	7
+		left:	3
+			left:	1
+				left:	0
+				right:	2
+			right:	5
+				left:	4
+				right:	6
+		right:	11
+			left:	9
+				left:	8
+				right:	10
+			right:	13
+				left:	12
+				right:	14
+					right:	15
+	0	1	2	3	4
+
+default test: "full_with_remove.txt"
+AVL-Tree input:
+	element:	7
+	values:		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 (16)
+AVL-Tree task: 
+	element		found
+AVL-Tree information: 
+	Height:		5
+	Size:		15
+	Minimum:	0
+	Maximum:	15
+	Values:		0 1 2 3 4 5 6 8 9 10 11 12 13 14 15 
+	Scheme:		
+	0	1	2	3	4
+	root:	8
+		left:	3
+			left:	1
+				left:	0
+				right:	2
+			right:	5
+				left:	4
+				right:	6
+		right:	11
+			left:	9
+				right:	10
+			right:	13
+				left:	12
+				right:	14
+					right:	15
+	0	1	2	3	4
+
+default test: "many_values.txt"
+AVL-Tree input:
+	element:	0
+	values:		-20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10... (21)
+AVL-Tree task: 
+	element		found
+AVL-Tree information: 
+	Height:		5
+	Size:		20
+	Minimum:	-20
+	Maximum:	20
+
+default test: "not_found.txt"
+AVL-Tree input:
+	element:	42
+	values:		-7, 0, 7, 13, 43 (5)
+AVL-Tree task: 
+	element		NOT found
+AVL-Tree information: 
+	Height:		3
+	Size:		5
+	Minimum:	-7
+	Maximum:	43
+	Values:		-7 0 7 13 43 
+	Scheme:		
+	0	1	2
+	root:	0
+		left:	-7
+		right:	13
+			left:	7
+			right:	43
+	0	1	2
+
+default test: "one_remove_one.txt"
+AVL-Tree input:
+	element:	1
+	values:		1, 1, 1, 1, 1, 1, 1 (7)
+AVL-Tree task: 
+	element		found
+AVL-Tree information: 
+	Height:		0
+	Size:		0
+	Minimum:	AVLTree::minimum() error: AVL-Tree is empty!
+	Maximum:	AVLTree::maximum() error: AVL-Tree is empty!
+	Values:		AVL-Tree is empty
+	Scheme:		AVL-Tree is empty
+
+default test: "repeat.txt"
+AVL-Tree input:
+	element:	13
+	values:		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 (13)
+AVL-Tree task: 
+	element		NOT found
+AVL-Tree information: 
+	Height:		1
+	Size:		1
+	Minimum:	1
+	Maximum:	1
+	Values:		1 
+	Scheme:		
+	0
+	root:	1
+	0
+
